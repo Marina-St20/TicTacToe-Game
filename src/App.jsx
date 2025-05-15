@@ -16,7 +16,7 @@ function App() {
 
   //these will rerender based on board
   const winner = calculateWinner(); //three in a row
-  const isGameOver = winner !== null || board.every(tile => tile !== null); //if winner is not null, or non of board is null
+  const isGameOver = winner !== null || board.every(tile => tile !== null); //if winner is not null, or none of board is null
 
   //Change statusMessage
   let statusMessage = "";
@@ -44,7 +44,7 @@ function App() {
       const [a,b,c] = winList[i]
 
       if (board[a] && board[a]===board[b] && board[b]===board[c]) { //board[a] to ensure none are null
-        return true;
+        return isXNext ? "O" : "X";
       }
     }
     //else return null
@@ -57,6 +57,8 @@ function App() {
   }
 
   function handleTileClick(tileNum) {
+    if (isGameOver) return;
+
     if (board[tileNum] === null) {
       if (isXNext) {
         board[tileNum] = "X";
