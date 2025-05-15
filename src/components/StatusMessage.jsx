@@ -1,7 +1,5 @@
 function StatusMessage({ message }) {
 
-    {console.log(message)}
-
     return (
         <label className = "status-mes">
             {message}
