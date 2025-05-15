@@ -1,3 +1,8 @@
+// TicTacToe App- A simple Tic-Tac-Toe game
+// Created by Marina S
+// GitHub: github.com/Marina-St20
+// License: MIT
+
 import { useState } from 'react';
 import './style.css';
 import StatusMessage from './components/StatusMessage';
@@ -5,20 +10,23 @@ import GameButton from './components/GameButton';
 import GameBoard from './components/GameBoard';
 
 function App() {
-  //States/Hooks:
-  //  board (array w 9 string representing 3x3 board)
-  //  isXNext (a boolean for whose turn is next) - default to true
-  //  winner (null, X, or O)
-  //  isGameOver (a boolean from winner/tie)
-  //  statusMessage (to display)
+  // ==== State Hooks ====
+  
+  // board: an array of 9 elements representing the 3x3 grid tiles
   const [board, setBoard] = useState(Array(9).fill(null));
+
+  // isXNext: a boolean for who's turn is next
   const [isXNext, setIsXNext] = useState(true);
 
-  //these will rerender based on board
-  const winner = calculateWinner(); //three in a row
-  const isGameOver = winner !== null || board.every(tile => tile !== null); //if winner is not null, or none of board is null
+  // === Derived State (computed based on board)
 
-  //Change statusMessage
+  // winner: either X, O, or null if there is no winner or a tie
+  const winner = calculateWinner();
+
+  // isGameOver: true if game is over (win/tie)
+  const isGameOver = winner !== null || board.every(tile => tile !== null);
+
+  // statusMessage logic
   let statusMessage = "";
   if (isGameOver) {
     if (winner !== null) {
@@ -31,58 +39,59 @@ function App() {
     statusMessage = `Player ${isXNext ? "X" : "O"} turn`;
   }
 
-  //Helper Functions
-  //  calculateWinner
-  //  handleNewGameClick
-  //  handleTileClick
+  // === Helper Functions ===
 
+  // Determines if there's a winner by checking win conditions
   function calculateWinner() {
-    //array of all possibilities of 3 in a rows
+    // Array of all possibilities of 3 in a rows
     const winList = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
-    //for loop through each array in the array to see if all are x or o (all same thing)
+
     for (let i = 0; i < winList.length; i++) {
       const [a,b,c] = winList[i]
 
-      if (board[a] && board[a]===board[b] && board[b]===board[c]) { //board[a] to ensure none are null
+      // Check if the same non-null symbol exsists in all three positions
+      if (board[a] && board[a]===board[b] && board[b]===board[c]) {
         return isXNext ? "O" : "X";
       }
     }
-    //else return null
+
     return null;
   }
 
+  // Resets the game to its initial state
   function handleNewGameClick() {
-    //clear board's tiles
     setBoard(Array(9).fill(null));
   }
 
+  // Handles user clicking a tile
   function handleTileClick(tileNum) {
+    // Prevent clicks if game is over
     if (isGameOver) return;
 
+    // Only allow if tile is empty
     if (board[tileNum] === null) {
-      if (isXNext) {
-        board[tileNum] = "X";
-      } 
-      else {
-        board[tileNum] = "O";
-      }
+      const newBoard = [...board];
+      newBoard[tileNum] = isXNext ? "X" : "O";
+      setBoard(newBoard);
       setIsXNext(!isXNext);
     }
-    console.log(`clicked tile ${tileNum} , board[tileNum] = ${board[tileNum]}`);
   }
 
+  // === JSX Layout ===
   return (
     <div className="game-app-div">
       <p className="game-title">Tic-Tac-Toe Game</p>
+
       {/* New Game Button */}
       <GameButton onClick={handleNewGameClick} />
+
       {/* Status Message */}
       <StatusMessage message={statusMessage} />
+
       {/* Game Board */}
       <GameBoard board={board} onClick={handleTileClick}/>
-      {/* Tiles - will be in game board component */}
     </div>
-  )
+  );
 }
 
 export default App;
