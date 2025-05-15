@@ -63,6 +63,8 @@
     height: 100px;
     background-color: white;
     font-size: 40px;
+    color: rgb(66, 65, 65);
+    font-family:'Times New Roman', Times, serif;
     display: flex;
     align-items: center;
     justify-content: center;
