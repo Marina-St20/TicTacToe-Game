@@ -20,14 +20,16 @@ function App() {
 
   //Change statusMessage
   let statusMessage = "";
-  if (isXNext) {
-    statusMessage = `Player ${statusMessage} turn`;
+  if (isGameOver) {
+    if (winner !== null) {
+      statusMessage = `Player ${winner} wins!`;
+    }
+    else {
+      statusMessage = `It's a tie!`
+    }
+  } else {
+    statusMessage = `Player ${isXNext ? "X" : "O"} turn`;
   }
-  //if isXNext: Player X turn, else Player O turn
-  //if isGameOver
-  //  if !winner then Player {winner} wins!
-  //  else It's a tie!
-
 
   //Helper Functions
   //  calculateWinner
@@ -35,10 +37,17 @@ function App() {
 
   function calculateWinner() {
     //array of all possibilities of 3 in a rows
-      
+    const winList = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
     //for loop through each array in the array to see if all are x or o (all same thing)
+    for (let i = 0; i < winList.length; i++) {
+      const [a,b,c] = winList[i]
 
+      if (board[a] && board[a]===board[b] && board[b]===board[c]) { //board[a] to ensure none are null
+        return true;
+      }
+    }
     //else return null
+    return null;
   }
 
   function handleNewGameClick() {
@@ -53,7 +62,7 @@ function App() {
       {/* New Game Button */}
       <GameButton onClick={handleNewGameClick} />
       {/* Status Message */}
-      <StatusMessage />
+      <StatusMessage message={statusMessage} />
       {/* Game Board */}
       <GameBoard />
       {/* Tiles - will be in game board component */}

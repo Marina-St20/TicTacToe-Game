@@ -1,8 +1,10 @@
-function StatusMessage() {
+function StatusMessage({ message }) {
+
+    {console.log(message)}
 
     return (
         <label className = "status-mes">
-            Status Message
+            {message}
         </label>
     )
 }
