@@ -1,16 +1,55 @@
-.gameAppDiv{
+.game-app-div {
     background-color: gray;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    gap: 7px;
+}
+
+.game-title {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 30px;
+    font-weight: bold;
     margin: 0;
 }
 
-.gameTitle {
-    color: white;
-    font-family:'Times New Roman', Times, serif;
-    font-size: 30px;
+.game-button {
+    background-color: white;
+    border-radius: 8px;
+    border-width: 0;
+    padding-inline: 10px;
+    padding-top: 3px;
+    padding-bottom: 4px;
+    font-family: 'Times New Roman', Times, serif;
     font-weight: bold;
+    font-size: 20px;
+    color: rgb(66, 65, 65);
+    box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    cursor: pointer;
+}
+
+
+.game-button:hover {
+    box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+    transform: translateY(-2px);
+}
+
+.game-button:active {
+    box-shadow: #D6D6E7 0 3px 7px inset;
+    transform: translateY(0.5px);
+}
+
+.status-mes {
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.game-board {
+    display: grid;
 }
