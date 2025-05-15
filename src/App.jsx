@@ -34,10 +34,11 @@ function App() {
   //Helper Functions
   //  calculateWinner
   //  handleNewGameClick
+  //  handleTileClick
 
   function calculateWinner() {
     //array of all possibilities of 3 in a rows
-    const winList = [[1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7]];
+    const winList = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
     //for loop through each array in the array to see if all are x or o (all same thing)
     for (let i = 0; i < winList.length; i++) {
       const [a,b,c] = winList[i]
@@ -51,9 +52,21 @@ function App() {
   }
 
   function handleNewGameClick() {
-    //console.log("NEW GAME CLICKED");
     //clear board's tiles
     setBoard(Array(9).fill(null));
+  }
+
+  function handleTileClick(tileNum) {
+    if (board[tileNum] === null) {
+      if (isXNext) {
+        board[tileNum] = "X";
+      } 
+      else {
+        board[tileNum] = "O";
+      }
+      setIsXNext(!isXNext);
+    }
+    console.log(`clicked tile ${tileNum} , board[tileNum] = ${board[tileNum]}`);
   }
 
   return (
@@ -64,7 +77,7 @@ function App() {
       {/* Status Message */}
       <StatusMessage message={statusMessage} />
       {/* Game Board */}
-      <GameBoard />
+      <GameBoard board={board} onClick={handleTileClick}/>
       {/* Tiles - will be in game board component */}
     </div>
   )

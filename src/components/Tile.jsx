@@ -1,6 +1,8 @@
-function Tile() {
+function Tile({value, onClick }) {
     return (
-        <div>Tile</div>
+        <div className = "tile" onClick={onClick}>
+            {value}
+        </div>
     )
 }
 

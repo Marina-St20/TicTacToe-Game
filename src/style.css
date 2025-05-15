@@ -52,4 +52,19 @@
 
 .game-board {
     display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    gap: 5px;
+}
+
+.tile {
+    background-color: white;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    font-size: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 }
