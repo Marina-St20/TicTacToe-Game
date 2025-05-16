@@ -11,7 +11,7 @@ import GameBoard from './components/GameBoard';
 
 function App() {
   // ==== State Hooks ====
-  
+
   // board: an array of 9 elements representing the 3x3 grid tiles
   const [board, setBoard] = useState(Array(9).fill(null));
 
@@ -47,10 +47,10 @@ function App() {
     const winList = [[0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6]];
 
     for (let i = 0; i < winList.length; i++) {
-      const [a,b,c] = winList[i]
+      const [a, b, c] = winList[i]
 
       // Check if the same non-null symbol exsists in all three positions
-      if (board[a] && board[a]===board[b] && board[b]===board[c]) {
+      if (board[a] && board[a] === board[b] && board[b] === board[c]) {
         return isXNext ? "O" : "X";
       }
     }
@@ -89,7 +89,17 @@ function App() {
       <StatusMessage message={statusMessage} />
 
       {/* Game Board */}
-      <GameBoard board={board} onClick={handleTileClick}/>
+      <GameBoard board={board} onClick={handleTileClick} />
+
+      <footer style={{ textAlign: 'center', marginTop: '2rem' }}>
+        <a
+          href="https://github.com/Marina-St20/TicTacToe-Game"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Link to GitHub Source
+        </a>
+      </footer>
     </div>
   );
 }
