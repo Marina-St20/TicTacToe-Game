@@ -96,6 +96,7 @@ function App() {
           href="https://github.com/Marina-St20/TicTacToe-Game"
           target="_blank"
           rel="noopener noreferrer"
+          style = {{color: 'white'}}
         >
           Link to GitHub Source
         </a>
